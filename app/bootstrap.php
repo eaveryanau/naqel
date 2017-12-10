@@ -7,3 +7,5 @@
  */
 
 require_once 'BackEndPreprocess.php';
+require_once 'helper.php';
+require_once 'Naqel.php';

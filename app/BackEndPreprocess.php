@@ -16,6 +16,9 @@ function naqel_options() {
 	global $_page;
 	add_menu_page( 'Naqel express', 'Naqel express', 'manage_options', $_page, 'naqel_option_page' );
     add_submenu_page( $_page, 'Waybills list', 'Waybills list', 'manage_options', 'naqel_waybills_page', 'naqel_waybills_list_page' );
+	add_submenu_page( null, 'Sticker', 'Sticker', 'manage_options', 'naqel_waybills_sticker_print', 'naqel_waybills_sticker_print' );
+	add_submenu_page( null, 'Hold', 'Hold', 'manage_options', 'naqel_waybill_hold', 'naqel_waybill_hold' );
+	add_submenu_page( null, 'Rto', 'Rto', 'manage_options', 'naqel_waybill_rto', 'naqel_waybill_rto' );
 }
 
 add_action( 'admin_menu', 'naqel_options' );
@@ -39,9 +42,36 @@ function naqel_option_page() {
     </form>
     </div><?php
 }
+
 function naqel_waybills_list_page(){
-    require_once "helper.php";
-    print waybills_list();
+
+    Naqel::printPageWaybillsList();
+
+    die();
+}
+
+function naqel_waybills_sticker_print(){
+
+
+    if(isset($_GET['order_id'])){
+	    Naqel::printSticker($_GET['order_id']);
+    }
+    die();
+
+}
+
+function naqel_waybill_hold(){
+    if(isset($_GET['order_id'])) {
+		Naqel::holdWaybill( $_GET['order_id'] );
+	}
+	die();
+}
+
+function naqel_waybill_rto(){
+    if(isset($_GET['order_id'])){
+        Naqel::rtoWaybill($_GET['order_id']);
+    }
+    die();
 }
 
 /*

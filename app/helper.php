@@ -12,3 +12,7 @@ function waybills_list(){
     ";
     return $out;
 }
+
+function custom_processing($order_id){
+	Naqel::createWaybill($order_id);
+}

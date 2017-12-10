@@ -10,3 +10,5 @@ Plugin URI: https://github.com/eaveryanau/naqel
 
 // Include methods for any entity.
 require_once('app/bootstrap.php');
+
+add_action('woocommerce_order_status_processing', 'custom_processing');
