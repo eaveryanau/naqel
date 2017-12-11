@@ -36,7 +36,7 @@ class Naqel {
 			. "<td>".get_post_meta($order->get_id(),'naqel_waybillNo',true)."</td>"
 			. "<td>".get_post_meta($order->get_id(),'naqel_ishold',true)."</td>"
 			. "<td>".get_post_meta($order->get_id(),'naqel_rto_waybillNo',true)."</td>"
-			. "<td><a href='/wp-admin/admin.php?page=naqel_waybill_rto&order_id=".$order->get_id()."'>RTO</a>&nbsp;&nbsp;<a href='/wp-admin/admin.php?page=naqel_waybills_sticker_print&order_id=".$order->get_id()."'>Sticker</a>&nbsp;&nbsp;<a href='/wp-admin/admin.php?page=naqel_waybill_hold&order_id=".$order->get_id()."'>Hold</a></td></tr>";
+			. "<td><a href='/wp-admin/admin.php?page=naqel_waybill_rto&order_id=".$order->get_id()."'>RTO</a>&nbsp;&nbsp;<a href='".get_post_meta($order->get_id(),'naqel_sticker_url',true)."'>Sticker</a>&nbsp;&nbsp;<a href='/wp-admin/admin.php?page=naqel_waybill_hold&order_id=".$order->get_id()."'>Hold</a></td></tr>";
 		}
 		print "</tbody></table>";
 		print "<style>table{width: 100%;border: 1px solid #ccc;text-align: center;border-collapse: collapse;}td{border:1px solid #ccc;padding:10px;}</style>";
@@ -140,6 +140,7 @@ class Naqel {
 			update_post_meta( $id, 'naqel_key', $key );
 			update_post_meta( $id, 'naqel_flag', 1 );
 			update_post_meta( $id, 'naqel_ishold', 0 );
+			self::printSticker($id);
 
 		}
 
@@ -152,7 +153,7 @@ class Naqel {
 		return $response;
 	}
 
-	public static function printSticker($id){
+	public static function printSticker($id, $rto = false){
 
 		$clientID = get_option('naqel_options')['client_id'];
 		$password = get_option('naqel_options')['passwd'];
@@ -215,6 +216,7 @@ class Naqel {
 			mkdir(wp_upload_dir()['basedir'] . '/hub_uploads', 0775);
 		}
 		$new_image = wp_upload_dir()['basedir'] . '/hub_uploads/invoice-'.$waybillNo.'.pdf';
+		$new_image_url = wp_upload_dir()['basedir'] . '/hub_uploads/invoice-'.$waybillNo.'.pdf';
 		// open the output file for writing
 		$ifp = fopen($new_image, 'wb');
 
@@ -226,15 +228,11 @@ class Naqel {
 
 		chmod($new_image, 0777);
 
-		if (file_exists($new_image)) {
-			header('Content-Type: application/pdf');
-			header('Content-Disposition: attachment; filename="'.basename($new_image).'"');
+		update_post_meta( $id, 'naqel_sticker_url', $new_image_url );
 
-			readfile($new_image);
-			exit;
-		}
 
-		return false;
+		header('Location: /wp-admin/admin.php?page=naqel_waybills_page');
+		die();
 	}
 
 
@@ -370,6 +368,7 @@ class Naqel {
 			update_post_meta( $id, 'naqel_rto_key', $key );
 			update_post_meta( $id, 'naqel_rto_flag', 1 );
 			update_post_meta( $id, 'naqel_rto_ishold', 0 );
+			self::printSticker($id);
 
 		}
 
