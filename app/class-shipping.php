@@ -7,7 +7,6 @@
  */
 class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
 
-    public $price;
 
     public function __construct(){
         $this->id = 'wc_naqel_shipping_method';
