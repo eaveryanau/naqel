@@ -17,7 +17,7 @@ class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
 
 
         // Define user set variables
-        $this->enabled   = $this->get_option( 'naqel_enabled' );
+        $this->enabled   = $this->get_option( 'enabled' );
         $this->title         = $this->get_option( 'naqel_title' );
 
 
@@ -48,7 +48,7 @@ class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
 
     public function init_form_fields(){
         $this->form_fields = array(
-            'naqel_enabled' => array(
+            'enabled' => array(
                 'title'       => __( 'Enable/Disable', 'woocommerce' ),
                 'type'            => 'checkbox',
                 'label'       => __( 'Enable Naqel Shipping for WooCommerce products', 'woocommerce' ),
