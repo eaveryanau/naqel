@@ -84,6 +84,8 @@ function option_settings() {
 
 	// Add setion
 	add_settings_section( 'naqel_section_1', 'Secure section', '', $_page );
+	add_settings_section( 'naqel_section_2', 'Client info section', '', $_page );
+	add_settings_section( 'naqel_section_3', 'Contact Client section', '', $_page );
 
 	// Add field for client ID
 	$naqel_client_id_field_params = array(
@@ -102,6 +104,146 @@ function option_settings() {
         'label_for' => 'passwd'
     );
     add_settings_field( 'password_field', 'Password', 'option_display_settings', $_page, 'naqel_section_1', $naqel_password_field_params );
+
+
+    //Client info
+
+    /**
+     * <ClientAddress>
+    <PhoneNumber>test phone</PhoneNumber>
+    <POBox>test pobox</POBox>
+    <ZipCode>zip code</ZipCode>
+    <Fax>fax</Fax>
+    <FirstAddress>first adress</FirstAddress>
+    <Location>Location</Location>
+    <CountryCode>KSA</CountryCode>
+    <CityCode>ABT</CityCode>
+    </ClientAddress>
+    <ClientContact>
+    <Name>string</Name>
+    <Email>string</Email>
+    <PhoneNumber>string</PhoneNumber>
+    <MobileNo>string</MobileNo>
+    </ClientContact>
+     */
+
+
+    // Add field phone of client naqel
+    $naqel_client_phone_field_params = array(
+        'type'      => 'text',
+        'id'        => 'phone',
+        'desc'      => 'Client phone number for Naqel.',
+        'label_for' => 'phone'
+    );
+    add_settings_field( 'phone_field', 'Phone', 'option_display_settings', $_page, 'naqel_section_2', $naqel_client_phone_field_params );
+
+    // Add field pobox of client naqel
+    $naqel_client_pobox_field_params = array(
+        'type'      => 'text',
+        'id'        => 'pobox',
+        'desc'      => 'Client POBox for Naqel.',
+        'label_for' => 'pobox'
+    );
+    add_settings_field( 'pobox_field', 'POBox', 'option_display_settings', $_page, 'naqel_section_2', $naqel_client_pobox_field_params );
+
+    // Add field ZipCode of client naqel
+    $naqel_client_zipcode_field_params = array(
+        'type'      => 'text',
+        'id'        => 'zipcode',
+        'desc'      => 'Client zipcode for Naqel.',
+        'label_for' => 'zipcode'
+    );
+    add_settings_field( 'zipcode_field', 'ZipCode', 'option_display_settings', $_page, 'naqel_section_2', $naqel_client_zipcode_field_params );
+
+    // Add field Fax of client naqel
+    $naqel_client_fax_field_params = array(
+        'type'      => 'text',
+        'id'        => 'fax',
+        'desc'      => 'Client fax for Naqel.',
+        'label_for' => 'fax'
+    );
+    add_settings_field( 'fax_field', 'Fax', 'option_display_settings', $_page, 'naqel_section_2', $naqel_client_fax_field_params );
+
+    // Add field FirstAddress of client naqel
+    $naqel_client_firstaddress_field_params = array(
+        'type'      => 'text',
+        'id'        => 'firstaddress',
+        'desc'      => 'Client FirstAddress for Naqel.',
+        'label_for' => 'firstaddress'
+    );
+    add_settings_field( 'firstaddress_field', 'FirstAddress', 'option_display_settings', $_page, 'naqel_section_2', $naqel_client_firstaddress_field_params );
+
+    // Add field Location of client naqel
+    $naqel_client_location_field_params = array(
+        'type'      => 'text',
+        'id'        => 'location',
+        'desc'      => 'Client Location for Naqel.',
+        'label_for' => 'location'
+    );
+    add_settings_field( 'location_field', 'Location', 'option_display_settings', $_page, 'naqel_section_2', $naqel_client_location_field_params );
+
+    // Add field CountryCode of client naqel
+    $naqel_client_countrycode_field_params = array(
+        'type'      => 'text',
+        'id'        => 'countrycode',
+        'desc'      => 'Client country code for Naqel.',
+        'label_for' => 'countrycode'
+    );
+    add_settings_field( 'countrycode_field', 'CountryCode', 'option_display_settings', $_page, 'naqel_section_2', $naqel_client_countrycode_field_params );
+
+
+    // Add field CityCode of client naqel
+    $naqel_client_citycode_field_params = array(
+        'type'      => 'text',
+        'id'        => 'citycode',
+        'desc'      => 'Client City Code for Naqel.',
+        'label_for' => 'citycode'
+    );
+    add_settings_field( 'citycode_field', 'CityCode', 'option_display_settings', $_page, 'naqel_section_2', $naqel_client_citycode_field_params );
+
+
+    // Add field contact_name of client naqel
+    $naqel_client_contact_name_field_params = array(
+        'type'      => 'text',
+        'id'        => 'contact_name',
+        'desc'      => 'Client contac name for Naqel.',
+        'label_for' => 'contact_name'
+    );
+    add_settings_field( 'contact_name_field', 'Name', 'option_display_settings', $_page, 'naqel_section_3', $naqel_client_contact_name_field_params );
+
+
+    // Add field Email of client naqel
+    $naqel_client_contact_email_field_params = array(
+        'type'      => 'text',
+        'id'        => 'contact_email',
+        'desc'      => 'Client contact email for Naqel.',
+        'label_for' => 'contact_email'
+    );
+    add_settings_field( 'contact_email_field', 'Email', 'option_display_settings', $_page, 'naqel_section_3', $naqel_client_contact_email_field_params );
+
+
+    // Add field Phone number of client naqel
+    $naqel_client_contact_phone_field_params = array(
+        'type'      => 'text',
+        'id'        => 'contact_phone',
+        'desc'      => 'Client contact phone for Naqel.',
+        'label_for' => 'contact_phone'
+    );
+    add_settings_field( 'contact_phone_field', 'Phone number', 'option_display_settings', $_page, 'naqel_section_3', $naqel_client_contact_phone_field_params );
+
+
+    // Add field Phone number of client naqel
+    $naqel_client_contact_mobile_field_params = array(
+        'type'      => 'text',
+        'id'        => 'contact_mobile',
+        'desc'      => 'Client contact mobile phone for Naqel.',
+        'label_for' => 'contact_mobile'
+    );
+    add_settings_field( 'contact_mobile_field', 'Mobile phone number', 'option_display_settings', $_page, 'naqel_section_3', $naqel_client_contact_mobile_field_params );
+
+
+
+
 
 }
 

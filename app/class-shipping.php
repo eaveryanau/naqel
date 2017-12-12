@@ -7,7 +7,6 @@
  */
 class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
 
-
     public function __construct(){
         $this->id = 'wc_naqel_shipping_method';
         $this->method_title = __( 'Naqel  Shipping', 'woocommerce' );
@@ -62,7 +61,7 @@ class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
                 'description'     => __( 'This controls the title which the user sees during checkout.', 'woocommerce' ),
                 'default'     => __( 'Naqel Shipping', 'woocommerce' ),
 
-            ),
+            )
         );
     }
 
@@ -74,7 +73,7 @@ class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
         $this->add_rate( array(
             'id'  => $this->id,
             'label' => $this->title,
-            'cost'    => '100',
+            'cost'    => '100'
         ));
         // This will add custom cost to shipping method
     }
