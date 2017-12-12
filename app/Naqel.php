@@ -71,8 +71,9 @@ class Naqel
         $contact_phone = get_option('naqel_options')['passwd'];
         $contact_mobile = get_option('naqel_options')['passwd'];
 
+        $declare_value = round($order->get_total());
+
         $codCharge = '15';
-        $declare_value = '15';
         $generate_pieces_bar_code = 'false';
 
         $input_xml = '<?xml version="1.0" encoding="utf-8"?>
