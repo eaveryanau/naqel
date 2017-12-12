@@ -7,6 +7,8 @@
  */
 class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
 
+    public $price;
+
     public function __construct(){
         $this->id = 'wc_naqel_shipping_method';
         $this->method_title = __( 'Naqel  Shipping', 'woocommerce' );
@@ -17,14 +19,14 @@ class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
 
 
         // Define user set variables
-        $this->enabled   = $this->get_option( 'naqel_enabled' );
-        $this->title         = $this->get_option( 'naqel_title' );
-        $this->price = $this->get_option('naqel_price');
+        $this->enabled   = $this->get_option( 'enabled' );
+        $this->title         = $this->get_option( 'title' );
+
 
 
         add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) ); // Updating Shipping setting fields values
 
-        add_filter( 'woocommerce_package_rates', array($this,'wc_hide_shipping_when_is_available'), 100 );  // this will hide other shipping methods if our shipping method is available
+       // add_filter( 'woocommerce_package_rates', array($this,'wc_hide_shipping_when_is_available'), 100 );  // this will hide other shipping methods if our shipping method is available
     }
 
 
@@ -35,8 +37,8 @@ class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
      * @param array $rates Array of rates found for the package.
      * @return array
      */
-    function wc_hide_shipping_when_is_available( $rates ) {
-        $new_product = array();
+//    function wc_hide_shipping_when_is_available( $rates ) {
+//        $new_product = array();
 //        foreach ( $rates as $rate_id => $rate ) {
 //            if ( 'wc_naqel_shipping_method' === $rate->method_id ) {
 //                $new_product[ $rate_id ] = $rate;
@@ -44,29 +46,22 @@ class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
 //            }
 //
 //        }
-        return ! empty( $new_product ) ? $new_product : $rates;
-    }
+//        return ! empty( $new_product ) ? $new_product : $rates;
+//    }
 
     public function init_form_fields(){
         $this->form_fields = array(
-            'naqel_enabled' => array(
+            'enabled' => array(
                 'title'       => __( 'Enable/Disable', 'woocommerce' ),
                 'type'            => 'checkbox',
                 'label'       => __( 'Enable Naqel Shipping for WooCommerce products', 'woocommerce' ),
                 'default'         => 'yes'
             ),
-            'naqel_title' => array(
+            'title' => array(
                 'title'       => __( 'WooCommerce Naqel Shipping', 'woocommerce' ),
                 'type'            => 'text',
                 'description'     => __( 'This controls the title which the user sees during checkout.', 'woocommerce' ),
                 'default'     => __( 'Naqel Shipping', 'woocommerce' ),
-
-            ),
-            'naqel_price' => array(
-                'title'       => __( 'Shipping Price', 'woocommerce' ),
-                'type'            => 'text',
-                'description'     => __( 'Type shipping price, default price 100', 'woocommerce' ),
-                'default'     => '100',
 
             ),
         );
@@ -80,7 +75,7 @@ class WC_Naqel_Product_Shipping_Method extends WC_Shipping_Method{
         $this->add_rate( array(
             'id'  => $this->id,
             'label' => $this->title,
-            'cost'    => $this->price,
+            'cost'    => '100',
         ));
         // This will add custom cost to shipping method
     }

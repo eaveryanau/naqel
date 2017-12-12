@@ -14,7 +14,7 @@ function waybills_list(){
 }
 
 function custom_processing($order_id){
- if (get_option('woocommerce_wc_naqel_shipping_method_settings')['naqel_enabled'] === 'yes'){
+ if (get_option('woocommerce_wc_naqel_shipping_method_settings')['enabled'] === 'yes'){
         Naqel::createWaybill($order_id);
     }
 }
