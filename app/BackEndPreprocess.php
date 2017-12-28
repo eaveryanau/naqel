@@ -84,6 +84,7 @@ function option_settings() {
 
 	// Add setion
 	add_settings_section( 'naqel_section_1', 'Secure section', '', $_page );
+	add_settings_section( 'naqel_section_4', 'Settings section', '', $_page );
 	add_settings_section( 'naqel_section_2', 'Client info section', '', $_page );
 	add_settings_section( 'naqel_section_3', 'Contact Client section', '', $_page );
 
@@ -106,7 +107,20 @@ function option_settings() {
     add_settings_field( 'password_field', 'Password', 'option_display_settings', $_page, 'naqel_section_1', $naqel_password_field_params );
 
 
-    //Client info
+    // Settings section
+
+	// Add field for password of client naqel
+	$naqel_codcharge_field_params = array(
+		'type'      => 'text',
+		'id'        => 'codcharge',
+		'desc'      => 'COD charge Naqel.',
+		'label_for' => 'codcharge'
+	);
+	add_settings_field( 'codcharge_field', 'COD Charge', 'option_display_settings', $_page, 'naqel_section_4', $naqel_codcharge_field_params );
+
+
+
+	//Client info
 
     /**
      * <ClientAddress>

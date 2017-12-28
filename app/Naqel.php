@@ -73,7 +73,18 @@ class Naqel
 
         $declare_value = round($order->get_total());
 
-        $codCharge = '15';
+	    if($order->get_payment_method() == 'payfort'){
+		    $codCharge = get_option('naqel_options')['codcharge'];
+	    }
+	    else{
+		    if($order->get_payment_method() == 'cod'){
+			    $codCharge = $order->get_total() + get_option('naqel_options')['codcharge'];
+		    }
+		    else{
+			    $codCharge = get_option('naqel_options')['codcharge'];
+		    }
+	    }
+
         $generate_pieces_bar_code = 'false';
 
         $input_xml = '<?xml version="1.0" encoding="utf-8"?>
